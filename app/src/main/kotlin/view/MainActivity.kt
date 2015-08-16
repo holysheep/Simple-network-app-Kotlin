@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import butterknife.bindView
-import com.taskmoney.R
+import taskmoney.R
+import yandexMoney.ApiController
 
 
 public class MainActivity : AppCompatActivity() {
@@ -16,11 +17,20 @@ public class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
         setSupportActionBar(toolbar)
-
+        fetchData()
         //fragment
-        val firstFragment : FirstFragment = FirstFragment?.Companion.newInstance()
-        getSupportFragmentManager().beginTransaction().add(R.id.flContainer, firstFragment, F_START).commit()
-
-        
+        //        val firstFragment : FirstFragment = FirstFragment?.Companion.newInstance()
+        //        getSupportFragmentManager().beginTransaction().add(R.id.flContainer, firstFragment, F_START).commit()
     }
+
+    fun fetchData() {
+        Thread(Runnable {
+            ApiController.restApi.getCategories()
+            //            Handler().post(Runnable {
+            //                val adapter = (recyclerView.getAdapter() as TreeAdapter)
+            //                adapter.categories =
+            //            })
+        })
+    }
+
 }

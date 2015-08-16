@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import butterknife.bindView
-import com.taskmoney.R
+import taskmoney.R
 
 public class SecondFragment : Fragment() {
 
