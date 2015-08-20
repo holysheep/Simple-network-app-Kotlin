@@ -1,4 +1,4 @@
-package view
+package view.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,6 +13,7 @@ import retrofit.Callback
 import retrofit.RetrofitError
 import retrofit.client.Response
 import taskmoney.R
+import view.TreeAdapter
 import yandexMoney.ApiController
 import yandexMoney.model.Category
 
@@ -24,8 +25,7 @@ public class FirstFragment : Fragment() {
     }
 
     val recyclerView: RecyclerView by bindView(R.id.categoriesList)
-    val adapter: TreeAdapter = TreeAdapter(getActivity())
-
+    var adapter: TreeAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_first, container, false)
@@ -35,15 +35,18 @@ public class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(getActivity())
         recyclerView.setLayoutManager(layoutManager)
+
+        adapter = TreeAdapter(getActivity())
         recyclerView.setAdapter(adapter)
+
         fetchData()
     }
 
     fun fetchData() {
         ApiController.restApi.getCategories(object : Callback<List<Category>> {
             override fun success(t: List<Category>?, response: Response?) {
-                adapter.categories = t as List<Category>
-                adapter.notifyDataSetChanged()
+                adapter!!.categories = t as List<Category>
+                (adapter as TreeAdapter).notifyDataSetChanged()
                 log("f1", "success")
             }
 

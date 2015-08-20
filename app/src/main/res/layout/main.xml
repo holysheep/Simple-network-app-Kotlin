@@ -14,18 +14,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_below="@id/toolbar">
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/categoriesList"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:scrollbars="vertical"/>
-
-		<!--<fragment android:id="@+id/fragment"-->
-		          <!--android:name="view.FirstFragment"-->
-		          <!--android:layout_width="wrap_content"-->
-		          <!--android:layout_height="match_parent"-->
-		          <!--android:layout_gravity="center"-->
-		          <!--tools:layout="@layout/fragment_first"/>-->
 	</FrameLayout>
 </RelativeLayout>
 

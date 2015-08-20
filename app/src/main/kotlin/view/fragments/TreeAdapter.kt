@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.bindView
+import log
 import taskmoney.R
 import yandexMoney.model.Category
 import java.util.ArrayList
@@ -18,7 +19,7 @@ class TreeAdapter(context: Context) : RecyclerView.Adapter<TreeAdapter.ViewHolde
         public fun onClick(v: View, position: Int)
     }
 
-    val context = context
+    val adapterCallback: AdapterCallback? = context as AdapterCallback
     var categories: List<Category> = ArrayList<Category>()
     var clickEvent: OnClickEvent? = null
 
@@ -29,9 +30,13 @@ class TreeAdapter(context: Context) : RecyclerView.Adapter<TreeAdapter.ViewHolde
 
         holder?.itemView?.setOnClickListener { v ->
             clickEvent?.onClick(v, position)
-            if (context is MainActivity)
-                context.changeFragment(position)
+            adapterCallback?.onMethodCallback(position)
+            log("pew", position.toString())
         }
+    }
+
+    public interface AdapterCallback {
+        fun onMethodCallback(position: Int);
     }
 
     override fun getItemCount(): Int = categories.size()

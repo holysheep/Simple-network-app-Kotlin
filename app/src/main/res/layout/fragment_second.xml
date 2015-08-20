@@ -4,7 +4,6 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context="view.CategoryFragment"
 	android:background="@color/material_blue_grey_800">
 
 	<android.support.v7.widget.RecyclerView
@@ -12,5 +11,4 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:scrollbars="vertical"/>
-
 </RelativeLayout>

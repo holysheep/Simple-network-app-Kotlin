@@ -4,15 +4,23 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import butterknife.bindView
+import log
+import retrofit.Callback
+import retrofit.RetrofitError
+import retrofit.client.Response
 import taskmoney.R
+import view.fragments.FirstFragment
+import view.fragments.SecondFragment
+import yandexMoney.ApiController
+import yandexMoney.model.Category
 
 
-public class MainActivity : AppCompatActivity() {
+public class MainActivity : AppCompatActivity(), TreeAdapter.AdapterCallback {
 
     val toolbar: Toolbar? by bindView(R.id.toolbar)
 
-    private val FG_REGISTRATION_TAG = "Registration"
-    private val FG_CHAT_ROOM_TAG = "ChatRoom"
+    private val FG_MAINFRAG = "Main Page"
+    private val FG_SECONDFRAG = "Second Page"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<AppCompatActivity>.onCreate(savedInstanceState)
@@ -21,20 +29,22 @@ public class MainActivity : AppCompatActivity() {
 
         //set FirstFragment
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.flContainer, FirstFragment.newInstance(), FG_REGISTRATION_TAG).commit()
+                .add(R.id.flContainer, FirstFragment.newInstance(), FG_MAINFRAG).commit()
 
     }
 
-    fun changeFragment(position: Int) {
+    override fun onMethodCallback(position: Int) {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.flContainer, SecondFragment.newInstance(position), FG_CHAT_ROOM_TAG).commit()
+                .add(R.id.flContainer, SecondFragment.newInstance(position), FG_SECONDFRAG).commit()
+
     }
 
     override fun onBackPressed() {
-        if (getSupportFragmentManager().findFragmentByTag(FG_CHAT_ROOM_TAG) != null) {
+        if (getSupportFragmentManager().findFragmentByTag(FG_SECONDFRAG) != null) {
             getSupportFragmentManager().popBackStack()
         } else {
-            super.onBackPressed()
+            super<AppCompatActivity>.onBackPressed()
         }
     }
+
 }
