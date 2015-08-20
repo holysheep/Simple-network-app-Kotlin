@@ -5,32 +5,36 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import butterknife.bindView
 import taskmoney.R
-import yandexMoney.ApiController
 
 
 public class MainActivity : AppCompatActivity() {
 
     val toolbar: Toolbar? by bindView(R.id.toolbar)
-    val F_START = "StartKey"
+
+    private val FG_REGISTRATION_TAG = "Registration"
+    private val FG_CHAT_ROOM_TAG = "ChatRoom"
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super<AppCompatActivity>.onCreate(savedInstanceState)
         setContentView(R.layout.main)
         setSupportActionBar(toolbar)
-        fetchData()
-        //fragment
-        //        val firstFragment : FirstFragment = FirstFragment?.Companion.newInstance()
-        //        getSupportFragmentManager().beginTransaction().add(R.id.flContainer, firstFragment, F_START).commit()
+
+        //set FirstFragment
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.flContainer, FirstFragment.newInstance(), FG_REGISTRATION_TAG).commit()
+
     }
 
-    fun fetchData() {
-        Thread(Runnable {
-            ApiController.restApi.getCategories()
-            //            Handler().post(Runnable {
-            //                val adapter = (recyclerView.getAdapter() as TreeAdapter)
-            //                adapter.categories =
-            //            })
-        })
+    fun changeFragment(position: Int) {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.flContainer, SecondFragment.newInstance(position), FG_CHAT_ROOM_TAG).commit()
     }
 
+    override fun onBackPressed() {
+        if (getSupportFragmentManager().findFragmentByTag(FG_CHAT_ROOM_TAG) != null) {
+            getSupportFragmentManager().popBackStack()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

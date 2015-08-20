@@ -2,33 +2,36 @@ package view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.bindView
 import taskmoney.R
 
 public class SecondFragment : Fragment() {
 
-    val recyclerView: RecyclerView by bindView(R.id.categoriesList)
-
     companion object {
-        fun newInstance(): FirstFragment = FirstFragment()
+        private val ARG_USERNAME = "arg_username"
+
+        fun newInstance(position: Int): FirstFragment {
+            val fragment = FirstFragment()
+            val args = Bundle()
+            args.putInt(ARG_USERNAME, position)
+            fragment.setArguments(args)
+            return fragment
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_first, container, false)
+        return inflater?.inflate(R.layout.fragment_second, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter: TreeAdapter = TreeAdapter()
-        recyclerView.setAdapter(adapter)
-
-        val layoutManager = LinearLayoutManager(getActivity()) //? this
-        recyclerView.setLayoutManager(layoutManager)
+        if (getArguments() != null) {
+            getArguments().getString(ARG_USERNAME)
+        } else {
+            IllegalAccessError("No username found")
+        }
     }
 }

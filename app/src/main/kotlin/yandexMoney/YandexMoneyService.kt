@@ -1,10 +1,11 @@
 package yandexMoney
 
+import retrofit.Callback
 import retrofit.http.GET
 import yandexMoney.model.Category
-import java.util.*
+
 
 interface YandexMoneyService {
     GET("/api/categories-list")
-    fun getCategories(): List<Category>
+    fun getCategories(callback: Callback<List<Category>>)
 }

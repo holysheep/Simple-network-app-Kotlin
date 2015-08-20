@@ -1,5 +1,5 @@
 package yandexMoney.model
 
-class InternalSubs (
+class InternalSubs(
         val subId: Int,
-        val subTitle: String )
+        val subTitle: String)

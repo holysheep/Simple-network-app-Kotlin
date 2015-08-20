@@ -9,4 +9,6 @@ object ApiController {
             .build();
 
     val restApi: YandexMoneyService = adapter.create(javaClass<YandexMoneyService>())
+
+
 }
