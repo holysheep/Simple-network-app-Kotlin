@@ -4,15 +4,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import butterknife.bindView
-import log
-import retrofit.Callback
-import retrofit.RetrofitError
-import retrofit.client.Response
 import taskmoney.R
 import view.fragments.FirstFragment
 import view.fragments.SecondFragment
-import yandexMoney.ApiController
-import yandexMoney.model.Category
 
 
 public class MainActivity : AppCompatActivity(), TreeAdapter.AdapterCallback {
@@ -30,13 +24,11 @@ public class MainActivity : AppCompatActivity(), TreeAdapter.AdapterCallback {
         //set FirstFragment
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.flContainer, FirstFragment.newInstance(), FG_MAINFRAG).commit()
-
     }
 
     override fun onMethodCallback(position: Int) {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.flContainer, SecondFragment.newInstance(position), FG_SECONDFRAG).commit()
-
     }
 
     override fun onBackPressed() {
@@ -46,5 +38,4 @@ public class MainActivity : AppCompatActivity(), TreeAdapter.AdapterCallback {
             super<AppCompatActivity>.onBackPressed()
         }
     }
-
 }

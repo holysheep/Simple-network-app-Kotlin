@@ -9,13 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.bindView
 import taskmoney.R
-import view.MainActivity
 import view.TreeAdapter
+import yandexMoney.model.Category
+import java.util.ArrayList
 
 public class SecondFragment : Fragment() {
 
+    val recyclerView: RecyclerView by bindView(R.id.categoriesList)
+    var adapter: TreeAdapter? = null
+
     companion object {
         private val ARG_USERNAME = "arg_username"
+        var categories: List<Category> = ArrayList<Category>()
 
         fun newInstance(position: Int): SecondFragment {
             val fragment = SecondFragment()
@@ -25,9 +30,6 @@ public class SecondFragment : Fragment() {
             return fragment
         }
     }
-
-    val recyclerView: RecyclerView by bindView(R.id.categoriesList)
-    var adapter: TreeAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_second, container, false)
@@ -47,6 +49,5 @@ public class SecondFragment : Fragment() {
         } else {
             IllegalAccessError("No username found")
         }
-
     }
 }

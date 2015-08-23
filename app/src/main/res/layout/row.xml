@@ -6,6 +6,6 @@
 
 	<TextView
 		android:id="@+id/categoryTitle"
-		android:text="@string/hello_world"
-		style="@style/CodeFont"/>
+		style="@style/CodeFont"
+		android:text="@string/hello_world"/>
 </RelativeLayout>
